@@ -52,7 +52,7 @@
             ctx.stroke();
         }
 
-        const OUTPUT_SIZE = 480;
+        const OUTPUT_SIZE = 500;
         const emotions = [ "angry", "disgust", "fear", "happy", "neutral", "sad", "surprise" ];
         let ferData = [];
         let setIndex = 0;
@@ -110,7 +110,7 @@
 
         async function trackFace() {
             // Change the number ot training data 
-            if( setIndex >= 3000 ) {//ferData.length ) {
+            if( setIndex >= 5000 ) {//ferData.length ) {
                 setText( "Finished!" );
                 trainNet();
                 return;
