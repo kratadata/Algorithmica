@@ -7,13 +7,15 @@
     <title>Emotional Reaction</title>
     <link rel="stylesheet" href="/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
 </head>
 
 <body>
-  
+ 
+
+ <!-- 
     <header>
+
 
         <div class="text">
             <ul>
@@ -45,22 +47,23 @@
 
 
     </header>
+-->
 
-    <h2 id="status" >Wait for the model to load...</h1>
-    <br>
     
 
 
-        <h3>hover over any image</h3>
-
+<!--        <h3>hover over any image</h3>  -->
+        <br>
         <div class="reactions" id="reactions">
             <div class ="fitImage">
-              <img id="reactionImage">
+                <img id="reactionImage" src="images/presentation.png">
                 <img src="images/react_1_spider.png" style="display: none">
                 <img src="images/react_2_trump.png" style="display: none">
                 <img src="images/react_3_headline.png" style="display: none">
                 <img src="images/react_4_fish.png" style="display: none">
                 <img src="images/react_5_bird.png" style="display: none">
+                <button class="button" id="button" type="button" onclick="change()">Begin</button>
+                <h2 id="status" >Wait for the model to load...</h2>
             </div>
         </div>
 
@@ -70,73 +73,42 @@
 
     <video id="webcam" playsinline style="
             visibility: hidden;
-            width: auto;
+            width: 300px;
             height: auto;
             ">
     </video>
 
+
+
+
+
     <div class="container" id="imageGrid">
-        <div class="overlay1">
+        <div id="overlay1">
             <img src="images/react_1_spider.png" alt="">
         </div>
-        <div class="overlay2">
+        <div id="overlay2">
             <img src="images/react_2_trump.png" alt="">
         </div>
-        <div class="overlay3">
+        <div id="overlay3">
             <img src="images/react_3_headline.png" alt="">
         </div>
-        <div class="overlay4">
+        <div id="overlay4">
             <img src="images/react_4_fish.png" alt="">
         </div>
-        <div class="overlay5">
+        <div id="overlay5">
             <img src="images/react_5_bird.png" alt="">
         </div>
-        <div class="overlay6">
+        <div id="overlay6">
             <img src="images/react_6_skate.png" alt="">
         </div>
 
     </div>
 
 
-    <script>
-        var images = [];
-
-        images[0] = ['images/react_1_spider.png'];
-        images[1] = ['images/react_2_trump.png'];
-        images[2] = ['images/react_3_headline.png'];
-        images[3] = ['images/react_4_fish.png'];
-        images[4] = ['images/react_5_bird.png'];
-        images[5] = ['images/react_6_skate.png'];
-        var index = 0;
-
-        function change() {
-            document.getElementById("reactionImage").src = images[index];
-            
-            if (index == 5) {
-                var slider = document.getElementById("reactions");
-                var grid = document.getElementById("imageGrid");
-
-                slider.style.display = "none";
-                wait(2000);
-                grid.style.display = "inline-grid";
-
-            } else {
-                index++;
-            }
-         setTimeout(change, 5000);
-        }
-
-        window.onload = change();
 
 
-        function wait(ms){
-            var start = new Date().getTime();
-            var end = start;
-            while(end < start + ms) {
-                end = new Date().getTime();
-            }
-}
-    </script>
+
+
 
 
     <script>
@@ -243,11 +215,14 @@
                 let emotion = await predictEmotion(points);
                 setText(`Detected: ${emotion}`);
 
+                currentEmotion = emotion;
+/*
                 setInterval(function () {
                     currentEmotion = emotion;
                     localStorage.setItem("CurrentEmotion", currentEmotion);
-                }, 5000);
-                //console.log(currentEmotion);
+                }, 3000);
+                console.log(currentEmotion);
+*/                
             }
             else {
                 setText("No Face");
@@ -290,6 +265,91 @@
 
             trackFace();
         })();
+
+
+
+
+
+
+        var images = [];
+
+        images[0] = ['images/react_1_spider.png'];
+        images[1] = ['images/react_2_trump.png'];
+        images[2] = ['images/react_3_headline.png'];
+        images[3] = ['images/react_4_fish.png'];
+        images[4] = ['images/react_5_bird.png'];
+        images[5] = ['images/react_6_skate.png'];
+        var index = 0;
+
+        let colormap = new Map();
+            colormap.set('surprise', 'yellow');
+            colormap.set('fear', 'purple');
+            colormap.set('disgust', 'brown');
+            colormap.set('happy', 'green');
+            colormap.set('sad', 'blue');
+            colormap.set('angry', 'red');
+            colormap.set('neutral', 'grey');
+
+        var caughtColormotion = 'neutral';
+
+
+        let imageset = [];
+
+
+        function change() {
+            document.getElementById("reactionImage").src = images[index];
+            if (index == 6) {
+                var slider = document.getElementById("reactions");
+                var grid = document.getElementById("imageGrid");
+
+                slider.style.display = "none";
+                wait(2000);
+                grid.style.display = "inline-grid";
+
+                buildResults();
+
+            } else {
+                caughtColormotion = colormap.get(currentEmotion);
+//                console.log(caughtColormotion);
+                imageset[index] = caughtColormotion;
+//                console.log(imageset);
+                index++;
+            }
+         setTimeout(change, 6000);
+        }
+
+
+
+
+        function wait(ms){
+            var start = new Date().getTime();
+            var end = start;
+            while(end < start + ms) {
+                end = new Date().getTime();
+            }
+        }
+
+
+        function getKey(value) {
+            return [...colormap].find(([key, val]) => val == value)[0]
+        }
+
+
+        function buildResults(){
+            for(var i=0; i<imageset.length; i++){
+                    let j = i + 1;
+                    var overlay = document.getElementById("overlay"+j);
+                    overlay.style.backgroundColor = imageset[i];
+                    //var p = document.createTextNode(getKey(imageset[i]));
+                    //overlay.appendChild(p);
+                }
+
+
+        }
+
+
+
+
     </script>
 
 

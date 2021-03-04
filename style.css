@@ -39,8 +39,9 @@ h1 {
 
 }
 h2 {
-    margin: 2em 0 2em 0;
-    padding-left:1em;
+    /*margin: 2em 0 2em 0;*/
+    /*padding-left:1em;*/
+    text-align: center;
 }
 
 h3{
@@ -119,7 +120,7 @@ p{
     padding: 3em;
 }
 
-
+/*
 .reactions {
     position:relative;
     left:10%;
@@ -127,6 +128,15 @@ p{
     width: 600px; 
     overflow: hidden;
 }   
+*/
+
+.reactions {
+    display: block;
+    margin-left: 30%;
+    margin-right: 20%;
+    width: 600px;
+    height: 600px;
+}
 
 
 
@@ -141,39 +151,58 @@ img:hover {
     transition: .17s;
 
 }
-.overlay1 {
+#overlay1 {
     background-color: var(--1) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
-.overlay2 {
+#overlay2 {
     background-color: var(--2) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
-.overlay3 {
+#overlay3 {
     background-color: var(--3) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
-.overlay4 {
+#overlay4 {
     background-color: var(--4) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
-.overlay5 {
+#overlay5 {
     background-color: var(--5) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
-.overlay6 {
+#overlay6 {
     background-color: var(--6) ;
     overflow: hidden;
     border-radius: 30px;
 
 }
+
+
+
+.button{border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                background-color: #4CAF50; /* Green */
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                height: 10%;
+                }
