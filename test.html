@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
-$END$
+
+
+<table id="widget">
+    <thead>
+    <tr>
+        <th>x</th>
+    </tr>
+    </thead>
+</table>
+
+
+<script>
+
+    var table = document.querySelector('#widget');
+    function addRows(color) {
+        if (!color) return;
+        var th = document.createElement('th');
+        table.appendChild(th);
+    }
+
+    addRows('x');
+
+</script>
 </body>
 </html>
