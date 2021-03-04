@@ -110,7 +110,7 @@
 
         async function trackFace() {
             // Change the number ot training data 
-            if( setIndex >= 5000 ) {//ferData.length ) {
+            if( setIndex >= ferData.length ) { 
                 setText( "Finished!" );
                 trainNet();
                 return;
