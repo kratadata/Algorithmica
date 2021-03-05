@@ -57,7 +57,9 @@ li.color{
     color: black;
 }
 p{
- font-size: .8em;
+ /*font-size: .8em;*/
+ text-align: center;
+ font-size: 16px;
  text-shadow: .4px .4px 0px #cecece;
  font-weight: 200;
  font-variant: small-caps;

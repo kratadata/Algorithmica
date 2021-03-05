@@ -72,7 +72,7 @@
     <canvas id="output"></canvas>
 
     <video id="webcam" playsinline style="
-            visibility: hidden;
+            /*visibility: hidden;*/
             width: 300px;
             height: auto;
             ">
@@ -85,21 +85,27 @@
     <div class="container" id="imageGrid">
         <div id="overlay1">
             <img src="images/react_1_spider.png" alt="">
+            <p id="poverlay1"></p>
         </div>
         <div id="overlay2">
             <img src="images/react_2_trump.png" alt="">
+            <p id="poverlay2"></p>
         </div>
         <div id="overlay3">
             <img src="images/react_3_headline.png" alt="">
+            <p id="poverlay3"></p>
         </div>
         <div id="overlay4">
             <img src="images/react_4_fish.png" alt="">
+            <p id="poverlay4"></p>
         </div>
         <div id="overlay5">
             <img src="images/react_5_bird.png" alt="">
+            <p id="poverlay4"></p>
         </div>
         <div id="overlay6">
             <img src="images/react_6_skate.png" alt="">
+            <p id="poverlay6"></p>
         </div>
 
     </div>
@@ -315,7 +321,7 @@
 //                console.log(imageset);
                 index++;
             }
-         setTimeout(change, 6000);
+         setTimeout(change, 2500);
         }
 
 
@@ -340,6 +346,9 @@
                     let j = i + 1;
                     var overlay = document.getElementById("overlay"+j);
                     overlay.style.backgroundColor = imageset[i];
+
+                    var poverlay = document.getElementById("poverlay"+j);
+                    poverlay.innerText = getKey(imageset[i]);
                     //var p = document.createTextNode(getKey(imageset[i]));
                     //overlay.appendChild(p);
                 }
